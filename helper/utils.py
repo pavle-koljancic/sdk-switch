@@ -3,7 +3,6 @@ import os
 from typing import Any
 
 import requests
-from frinx.common.logging.root_logger import logger as task_logger
 from requests.auth import HTTPBasicAuth
 
 from exceptions.exceptions import NSOError
@@ -12,6 +11,9 @@ from models.config.nso_config import NSOConfig
 from models.nso.nso_base_result import NsoBaseResult
 from models.nso.nso_query_strategy import NsoBaseParameters
 from models.nso.nso_query_strategy import NsoQueryStrategy
+from task_logging.task_logger import get_task_logger
+
+task_logger = get_task_logger()
 
 
 def execute_nso_restconf_query_request(nso_config: NSOConfig, request_body: str) -> requests.Response:
