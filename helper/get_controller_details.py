@@ -1,14 +1,16 @@
 from typing import TypeVar
 
 import requests
-from frinx.common.logging.root_logger import logger as task_logger
 from pydantic import BaseModel
 from requests.auth import HTTPBasicAuth
 
 from exceptions.exceptions import NSOError
 from models.config.nso_config import NSOConfig
+from task_logging.task_logger import get_task_logger
 
 T = TypeVar("T", bound=BaseModel)
+
+task_logger = get_task_logger()
 
 
 def get_controller_details(controller_type: str, model_class: type[T]) -> T:

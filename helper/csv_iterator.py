@@ -4,12 +4,14 @@ from collections.abc import Iterator
 from dataclasses import is_dataclass
 from typing import TypeVar
 
-from frinx.common.logging.root_logger import logger as task_logger
 from pydantic import ValidationError
 
 from helper.utils import resolve_host_path
+from task_logging.task_logger import get_task_logger
 
 T = TypeVar("T")
+
+task_logger = get_task_logger()
 
 
 def iterator(csv_name: str, delimiter: str, dataclass_type: type[T], logging: bool = True) -> Iterator[T]:

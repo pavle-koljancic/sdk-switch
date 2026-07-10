@@ -87,6 +87,7 @@ ignore_missing_imports = true
 disallow_untyped_defs = true
 disallow_subclassing_any = false
 warn_unused_ignores = false
+disable_error_code = ["untyped-decorator"]
 
 [tool.pydantic-mypy]
 init_forbid_extra = true
