@@ -3,7 +3,6 @@ name = "worker"
 version = "0.4.0"
 description = "Template for the new setup of the Open Fiber python worker."
 authors = ["Pavle Koljancic <pavle.koljancic@codaxy.com>"]
-package-mode = false
 readme = "README.md"
 
 [tool.pytest.ini_options]
