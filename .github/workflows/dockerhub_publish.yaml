@@ -1,0 +1,57 @@
+name: Publish image to Dockerhub
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build, push docker image to Dockerhub and create release
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install poetry
+        uses: abatilo/actions-poetry@v2
+        with:
+          poetry-version: "1.7.1"
+
+      - name: Setup ssh-agent with a private key
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+            ssh-private-key: ${{ secrets.PRIVATE_KEY_FRINX_SERVICES_PYTHON_WORKERS }}
+
+      - name: Build image
+        run: |
+          . ./deployment/build.sh
+          echo "IMAGE_NAME=${IMAGE_NAME}" >> "$GITHUB_ENV"
+          echo "RELEASE_TAG=$(echo $IMAGE_NAME | sed 's|:|-|g')" >> "$GITHUB_ENV"
+
+      - name: Log into Dockerhub
+        run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
+
+      - name: Push docker image to Dockerhub
+        run: docker push ${{ env.IMAGE_NAME }}
+
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.RELEASE_TAG }}
+          release_name: Release ${{ env.RELEASE_TAG }}
+          body: |
+            - Release of image with tag ${{ env.IMAGE_NAME }}
+          draft: false
+          prerelease: false

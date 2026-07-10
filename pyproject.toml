@@ -1,0 +1,118 @@
+[tool.poetry]
+name = "worker"
+version = "0.4.0"
+description = "Template for the new setup of the Open Fiber python worker."
+authors = ["Pavle Koljancic <pavle.koljancic@codaxy.com>"]
+package-mode = false
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.14.6"
+dotenv = "^0.9.9"
+pydantic = "^2.13.4"
+pydantic-settings = "^2.14.2"
+requests = "^2.34.2"
+jinja2 = "^3.1.6"
+paramiko = "^5.0.0"
+conductor-python = "^1.5.0"
+jsonpath-ng = "^1.8.0"
+psycopg = "^3.3.4"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^26.5.1"
+ruff = "^0.15.20"
+mypy = "^2.1.0"
+types-requests = "^2.33.0.20260518"
+pre-commit = "^4.6.0"
+pytest-mock = "^3.15.1"
+types-paramiko = "^5.0.0.20260617"
+
+
+[tool.poetry.group.test.dependencies]
+pytest = "^9.1.1"
+requests-mock = "^1.12.1"
+jq = "^1.11.0"
+
+
+[tool.ruff]
+line-length = 120  # Set the maximum allowed line length to 120 characters.
+indent-width = 4
+target-version = "py311"
+
+[tool.ruff.lint]
+ignore = ["E501"]
+extend-select = [
+    "Q",       # flake8-quotes
+    "RUF100",  # unused-noqa
+    "C90",     # mccabe complexity
+    "UP",      # pyupgrade
+    "I",       # isort
+    "E",       # pycodestyle (error)
+    "W",       # pycodestyle (warning)
+    "F",       # pyflakes
+    "N",       # pep8-naming
+    "PL",      # pylint
+]
+
+[tool.ruff.lint.isort]
+force-single-line = true
+
+[tool.ruff.lint.mccabe]
+max-complexity = 14
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.pylint]
+max-args = 10
+
+[tool.ruff.lint.pyupgrade]
+keep-runtime-typing = true
+
+[tool.ruff.lint.pep8-naming]
+classmethod-decorators = ["classmethod", "pydantic.field_validator"]
+
+[tool.mypy]
+python_version = "3.12"
+plugins = ["pydantic.mypy"]
+exclude = ["tests"]
+explicit_package_bases = true
+namespace_packages = true
+strict = true
+pretty = true
+ignore_missing_imports = true
+disallow_untyped_defs = true
+disallow_subclassing_any = false
+warn_unused_ignores = false
+
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = true
+warn_required_dynamic_aliases = true
+warn_untyped_fields = true
+
+
+[tool.deptry.package_module_name_map]
+python-dotenv = ["dotenv"]
+jsonpath-ng = ["jsonpath_ng"]
+pydantic-settings = ["pydantic_settings"]
+pre-commit = ["pre_commit"]
+pytest-mock = ["pytest_mock"]
+requests-mock = ["requests_mock"]
+types-requests = ["requests"]
+jinja2 = ["jinja2"]
+requests = ["requests"]
+mypy = ["mypy"]
+ruff = ["ruff"]
+jq = ["jq"]
+pytest = ["pytest"]
+psycopg = ["psycopg"]
+conductor-python = ["conductor"]
+pydantic = ["pydantic"]
+paramiko = ["paramiko"]
+aiohttp = ["aiohttp"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
