@@ -1,6 +1,5 @@
 from typing import Annotated
 from typing import Any
-from typing import cast
 
 from pydantic import AfterValidator
 from pydantic import BaseModel
