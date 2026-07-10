@@ -19,12 +19,12 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
+          python-version: '3.14.6'
 
       - name: Install poetry
         uses: abatilo/actions-poetry@v2
         with:
-          poetry-version: "1.7.1"
+          poetry-version: "1.8.2"
 
       - name: Setup ssh-agent with a private key
         uses: webfactory/ssh-agent@v0.8.0
