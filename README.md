@@ -2,30 +2,23 @@
 
 ## 1. Prerequisites
 
-- Python 3.11
-- Available local or external FM services (see [FRINXio/gitops-of](https://github.com/FRINXio/gitops-of))
+- Python 3.14.6
 - [Poetry](https://python-poetry.org/docs/#installing-with-the-official-installer) version 2.0.0 or newer
     - You may install Poetry using: `curl -sSL https://install.python-poetry.org | python3 -`
 
 ## 2. Setting Up the Project with Poetry
 
-1. Download ZIP or Clone the repository:
-
-   ```sh
-   git clone https://github.com/FRINXio/openfb.git
-   ```
-
-2. Navigate to the project directory:
+1. Navigate to the project directory:
    ```sh
    cd openfb
    ```
 
-3. Configure Poetry to use the correct Python 3 path (Python 3.11):
+2. Configure Poetry to use the correct Python 3 path (Python 3.11):
    ```sh
-   poetry env use python3.11
+   poetry env use python3.14.6
    ```
 
-4. Activate the created environment. For IDE users, verify that the installed environment is detected. If not, manually
+3. Activate the created environment. For IDE users, verify that the installed environment is detected. If not, manually
    configure the environment in the IDE settings to ensure proper integration.
 
 ## 3. Installing project dependencies
@@ -44,9 +37,9 @@ poetry install --with dev,test
 
 ## 4. Running main for local development
 
-1. Change [config/.env.template](https://github.com/FRINXio/openfb/blob/main/config/.env.template) to `config/.env` and
+1. Change [config/.env.template] to `config/.env` and
    fill in required variables (DB and NSO values, CSV paths, etc.).
-2. Make sure you have access to FM and DB/NSO.
+2. Make sure you have access to external services.
 3. Use `poetry run python main.py` to start the main script.
 
 That’s all - your local environment is now ready and running!
@@ -58,7 +51,7 @@ That’s all - your local environment is now ready and running!
 > Password will be requested afterward.
 
 ```sh
-ssh -L 5432:10.246.129.2:5432 -L 8080:10.246.128.126:8080 <username>@10.40.62.156
+ssh -L 5432:10.246.129.2:5432 -L 8080:10.246.128.126:8080 <username>@10.246.128.54
 ```
 
 

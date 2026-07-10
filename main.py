@@ -9,7 +9,6 @@ from task_logging.task_execution_logger import TaskExecutionLogger
 
 
 def main() -> None:
-
     env_path = Path("config") / ".env"
     load_dotenv(dotenv_path=env_path)
 
