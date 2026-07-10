@@ -50,9 +50,7 @@ class WdmShelfSlotPort(BaseModel):
     port: Annotated[str, BeforeValidator(_validate_port)]
 
     num_of_ports_full: ClassVar[int] = 3  # In case the shelf/slot/port is specified as 1/2/3
-    num_of_ports_short: ClassVar[int] = (
-        2  # In case the shelf/slot/port is specified as 2/1 in that case  shelf is 0 by default
-    )
+    num_of_ports_short: ClassVar[int] = 2
 
     def format_primary_slot_port(self) -> str:
         """
