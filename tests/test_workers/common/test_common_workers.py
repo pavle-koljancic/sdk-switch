@@ -70,7 +70,6 @@ class TestExportToLocalDisk:
         workflow_id,
         pop_name,
         expected_content: str,
-        tmp_path,
     ):
         mock_get_workflow_data.return_value = {"createTime": 1710000000000, "parentWorkflowId": None}
         mock_generate_timestamp.return_value = "20250317-120000-CET"
@@ -133,7 +132,6 @@ class TestExportToLocalDisk:
         pop_name,
         file_type,
         expected_content: str,
-        tmp_path,
     ):
         mock_get_workflow_data.return_value = {"createTime": 1710000000000, "parentWorkflowId": None}
         mock_generate_timestamp.return_value = "20250317-120000-CET"
