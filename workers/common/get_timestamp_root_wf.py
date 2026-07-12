@@ -14,7 +14,6 @@ task_logger = get_task_logger()
     register_task_def=True,  # Auto-register on startup
 )
 def get_timestamp_root_wf(workflow_id: str) -> str:
-
     workflow_data: dict[str, Any] = get_workflow_data(workflow_id)
 
     while workflow_data and workflow_data.get("parentWorkflowId"):

@@ -25,12 +25,12 @@ class WorkerOutput:
 )
 def export_to_local_disk(
     file_name: str,
-    filetype: str,
     workflow_id: str,
     pop_name: str,
     directory: str | int,
-    fields: list[str],
     data_to_save: object,
+    filetype: str = "txt",
+    fields: list[str] = [],
 ) -> WorkerOutput:
     output_file_path: str | None = None
     is_saved: bool = False
