@@ -1,4 +1,5 @@
-import patches.conductor  # noqa: F401
+from importlib import import_module
+import_module("patches.conductor")
 from pathlib import Path
 
 from conductor.client.automator.task_handler import TaskHandler
