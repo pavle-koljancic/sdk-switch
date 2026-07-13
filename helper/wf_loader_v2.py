@@ -106,7 +106,7 @@ class WorkflowDataNode:
                     TaskError(
                         name=task["referenceTaskName"],
                         status=task["status"],
-                        info=task["reasonForIncompletion"],
+                        info=task.get("reasonForIncompletion", "unknown"),
                         task_id=task["taskId"],
                     )
                 )

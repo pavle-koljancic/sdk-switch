@@ -43,6 +43,7 @@ indent-width = 4
 target-version = "py311"
 
 [tool.ruff.lint]
+unfixable = ["F401"]
 ignore = ["E501"]
 extend-select = [
     "Q",       # flake8-quotes

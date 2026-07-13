@@ -1,3 +1,4 @@
+import patches.conductor  # noqa: F401
 from pathlib import Path
 
 from conductor.client.automator.task_handler import TaskHandler
@@ -50,6 +51,12 @@ def main() -> None:
         "workers.common.get_timestamp_root_wf",
         "workers.common.export_to_local_disk",
         "workers.common.map_interface_to_short_name",
+        "workers.svlan_father_workflow_coordinator.check_recursively_if_has_failed_task",
+        "workers.svlan_father_workflow_coordinator.create_fork_inputs_wdm",
+        "workers.svlan_father_workflow_coordinator.create_svlan_bash_scripts",
+        "workers.svlan_father_workflow_coordinator.is_kit_on_wdm",
+        "workers.svlan_father_workflow_coordinator.organize_commands_by_layer",
+        "workers.svlan_father_workflow_coordinator.prepare_extracted_svlns_for_fork",
     ]
     with TaskHandler(
         configuration=config,
