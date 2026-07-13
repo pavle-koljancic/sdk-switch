@@ -12,7 +12,6 @@ from helper.wf_loader_v2 import build_workflow_data_tree
 def check_recursively_if_has_failed_task(
     workflow_id: str, propagate_fail: bool | None = False, return_failed_tasks_data: bool | None = False
 ) -> TaskResult:
-
     workflow_data_tree = build_workflow_data_tree(workflow_id)
     error_data = workflow_data_tree.build_error_tree()
 

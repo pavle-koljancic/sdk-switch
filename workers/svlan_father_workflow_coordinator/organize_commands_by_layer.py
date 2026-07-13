@@ -70,7 +70,6 @@ def flatten_command_data(data: dict[str, Any] | list[Any], result: list[str]) ->
     register_task_def=True,  # Auto-register on startup
 )
 def organize_commands_by_layer(all_commands: dict[str, Any]) -> dict[str, Any]:
-
     commands_by_layer: dict[str, Any] = aggregate_commands_by_layer(all_commands)
 
     return commands_by_layer

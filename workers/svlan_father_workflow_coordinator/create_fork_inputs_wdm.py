@@ -1,4 +1,3 @@
-import json
 from typing import Any
 
 from conductor.client import worker_task
@@ -10,13 +9,7 @@ from models.fork.dynamic_fork_inputs import DynamicForkInputs
     task_definition_name="create_fork_inputs_wdm",
     register_task_def=True,  # Auto-register on startup
 )
-def create_fork_inputs_wdm(paths: list[dict[str, str]], svlan: str | int, pop_collect: str) -> DynamicForkInputs:
-    # Temporary workaround: when run from the definition, the 'paths' input is a string,
-    # but when executed as a rerun, the same very same input is a list.
-    if isinstance(paths, str):
-        paths = json.loads(paths)
-    ###
-
+def create_fork_inputs_wdm(svlan: str | int, pop_collect: str, paths: list[dict[str, str]]) -> DynamicForkInputs:
     if isinstance(svlan, int):
         svlan = str(svlan)
 

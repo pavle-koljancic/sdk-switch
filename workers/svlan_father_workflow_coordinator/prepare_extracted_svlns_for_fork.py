@@ -18,7 +18,7 @@ def prepare_extracted_svlns_for_fork(
     pop_standard: str,
     pop_exception: str,
     new_trunk: str,
-    paths: list[dict],
+    paths: list[dict[str, str]],
 ) -> DynamicForkInputs:
     dynamic_tasks = []  # Initialize an empty list to hold dynamically generated tasks.
     fork_id = 1  # Initialize a variable to keep track of unique IDs for forks.

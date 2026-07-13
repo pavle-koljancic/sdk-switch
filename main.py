@@ -1,5 +1,4 @@
 from importlib import import_module
-import_module("patches.conductor")
 from pathlib import Path
 
 from conductor.client.automator.task_handler import TaskHandler
@@ -8,6 +7,8 @@ from dotenv import load_dotenv
 
 from helper.utils import check_env_vars
 from task_logging.task_execution_logger import TaskExecutionLogger
+
+import_module("patches.conductor")
 
 
 def validate_env() -> None:
