@@ -154,6 +154,10 @@ def process_csv(path: Path, input_file: str) -> None:
 @worker_task(
     task_definition_name="create_svlan_bash_scripts",
     register_task_def=True,  # Auto-register on startup
+        task_def = TaskDef(
+                    description=
+               "Create two bash script SVLAN_extraction_vlan_empty_user.sh and SVLAN_extraction_vlan_remaining.sh for specific pop name",
+            timeout_seconds=  180)
 )
 def create_svlan_bash_scripts(path: str, svlan_extraction_csv: str) -> None:
     csv_path = Path(Path("fm_outputs") / f"{path}")

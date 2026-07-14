@@ -23,6 +23,13 @@ class WorkerOutput:
 @worker_task(
     task_definition_name="export_to_local_disk",
     register_task_def=True,  # Auto-register on startup
+    task_def = TaskDef(
+                    description=(
+                "Saves data to a .txt file on a a local disk, creating a directory if needed and "
+                "appending a timestamp to the filename."
+            ),
+            timeout_seconds=  180
+    )
 )
 def export_to_local_disk(
     file_name: str,

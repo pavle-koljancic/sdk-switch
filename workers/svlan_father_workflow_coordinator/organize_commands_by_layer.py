@@ -69,6 +69,10 @@ def flatten_command_data(data: dict[str, Any] | list[Any], result: list[str]) ->
 @worker_task(
     task_definition_name="organize_commands_by_layer",
     register_task_def=True,  # Auto-register on startup
+    task_def = TaskDef(
+                    description=
+               "Organize output for all subworkflows based on layers. WDM, Router, Olt layer",
+            timeout_seconds=  180)
 )
 def organize_commands_by_layer(all_commands: dict[str, Any]) -> dict[str, Any]:
     commands_by_layer: dict[str, Any] = aggregate_commands_by_layer(all_commands)

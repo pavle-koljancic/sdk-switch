@@ -10,6 +10,9 @@ from conductor.client.http.models.task_def import TaskDef
 @worker_task(
     task_definition_name="prepare_extracted_svlns_for_fork",
     register_task_def=True,  # Auto-register on startup
+    task_def=TaskDef(
+                    description="Create tasks and input data for dynamic forks to run sub-workflows from the WDM layer.",
+            timeout_seconds=  180)
 )
 def prepare_extracted_svlns_for_fork(
     extracted_svlan_outputs: list[SvlanExtractionOutput],

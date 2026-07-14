@@ -8,6 +8,9 @@ from conductor.client.http.models.task_def import TaskDef
 @worker_task(
     task_definition_name="create_fork_inputs_wdm",
     register_task_def=True,  # Auto-register on startup
+        task_def=TaskDef(
+                    description="Create tasks and input data for dynamic forks to run sub-workflows from the WDM layer.",
+            timeout_seconds=  180)
 )
 def create_fork_inputs_wdm(svlan: str | int, pop_collect: str, paths: list[dict[str, str]]) -> DynamicForkInputs:
     if isinstance(svlan, int):
