@@ -1,8 +1,9 @@
 from conductor.client import worker_task
+from conductor.client.http.models.task_def import TaskDef
 
 from models.router.router_interfaces import CiscoIOSInterface
 from models.router.router_interfaces import CiscoIOSXrInterface
-from conductor.client.http.models.task_def import TaskDef
+
 
 def _full_to_short_interface(full_name: str, os_version: str) -> str | None:
     """Convert full interface name to short enum key"""
@@ -16,12 +17,11 @@ def _full_to_short_interface(full_name: str, os_version: str) -> str | None:
 @worker_task(
     task_definition_name="map_interface_to_short_name",
     register_task_def=True,  # Auto-register on startup
-        task_def = TaskDef(
-                    description=(
-                "Convert full interface name to short enum key (Te/Ge/Hu)"
-            ),
-            timeout_seconds=60,
-            )
+    task_def=TaskDef(
+        description=("Convert full interface name to short enum key (Te/Ge/Hu)"),
+        timeout_seconds=60,
+        response_timeout_seconds=60.0,
+    ),
 )
 def map_interface_to_short_name(interface_full: str, os_version: str) -> str:
     short_ifc = _full_to_short_interface(interface_full, os_version)

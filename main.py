@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 
 from helper.utils import check_env_vars
 from task_logging.task_execution_logger import TaskExecutionLogger
+from workers import discover_worker_modules
 
 import_module("patches.conductor")
 
@@ -49,17 +50,8 @@ def main() -> None:
     validate_env()
     config = Configuration()
     event_listeners = [TaskExecutionLogger()]
-    import_modules: list[str] = [
-        "workers.common.get_timestamp_root_wf",
-        "workers.common.export_to_local_disk",
-        "workers.common.map_interface_to_short_name",
-        "workers.svlan_father_workflow_coordinator.check_recursively_if_has_failed_task",
-        "workers.svlan_father_workflow_coordinator.create_fork_inputs_wdm",
-        "workers.svlan_father_workflow_coordinator.create_svlan_bash_scripts",
-        "workers.svlan_father_workflow_coordinator.is_kit_on_wdm",
-        "workers.svlan_father_workflow_coordinator.organize_commands_by_layer",
-        "workers.svlan_father_workflow_coordinator.prepare_extracted_svlns_for_fork",
-    ]
+    import_modules: list[str] = discover_worker_modules()
+
     with TaskHandler(
         configuration=config,
         scan_for_annotated_workers=True,

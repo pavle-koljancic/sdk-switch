@@ -4,12 +4,12 @@ from pathlib import Path
 from typing import Any
 
 from conductor.client import worker_task
+from conductor.client.http.models.task_def import TaskDef
 
 from helper.timestamp_utils import generate_timestamp
 from helper.timestamp_utils import get_workflow_data
 from helper.utils import resolve_host_path
 from task_logging.task_logger import get_task_logger
-from conductor.client.http.models.task_def import TaskDef
 
 task_logger = get_task_logger()
 
@@ -23,13 +23,14 @@ class WorkerOutput:
 @worker_task(
     task_definition_name="export_to_local_disk",
     register_task_def=True,  # Auto-register on startup
-    task_def = TaskDef(
-                    description=(
-                "Saves data to a .txt file on a a local disk, creating a directory if needed and "
-                "appending a timestamp to the filename."
-            ),
-            timeout_seconds=  180
-    )
+    task_def=TaskDef(
+        description=(
+            "Saves data to a .txt file on a a local disk, creating a directory if needed and "
+            "appending a timestamp to the filename."
+        ),
+        timeout_seconds=180,
+        response_timeout_seconds=180.0,
+    ),
 )
 def export_to_local_disk(
     file_name: str,

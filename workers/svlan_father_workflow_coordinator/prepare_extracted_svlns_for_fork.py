@@ -1,18 +1,20 @@
 from typing import Any
 
 from conductor.client import worker_task
+from conductor.client.http.models.task_def import TaskDef
 
 from models.fork.dynamic_fork_inputs import DynamicForkInputs
 from models.svlan_extraction.svlan_extraction_output import SvlanExtractionOutput
-from conductor.client.http.models.task_def import TaskDef
 
 
 @worker_task(
     task_definition_name="prepare_extracted_svlns_for_fork",
     register_task_def=True,  # Auto-register on startup
     task_def=TaskDef(
-                    description="Create tasks and input data for dynamic forks to run sub-workflows from the WDM layer.",
-            timeout_seconds=  180)
+        description="Create tasks and input data for dynamic forks to run sub-workflows from the WDM layer.",
+        timeout_seconds=180,
+        response_timeout_seconds=180.0,
+    ),
 )
 def prepare_extracted_svlns_for_fork(
     extracted_svlan_outputs: list[SvlanExtractionOutput],
