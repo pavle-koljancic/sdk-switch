@@ -9,6 +9,7 @@ from helper.timestamp_utils import generate_timestamp
 from helper.timestamp_utils import get_workflow_data
 from helper.utils import resolve_host_path
 from task_logging.task_logger import get_task_logger
+from conductor.client.http.models.task_def import TaskDef
 
 task_logger = get_task_logger()
 

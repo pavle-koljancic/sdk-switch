@@ -6,6 +6,7 @@ from typing import Any
 from conductor.client import worker_task
 
 from task_logging.task_logger import get_task_logger
+from conductor.client.http.models.task_def import TaskDef
 
 MAX_ROW_IN_CSV = 6
 

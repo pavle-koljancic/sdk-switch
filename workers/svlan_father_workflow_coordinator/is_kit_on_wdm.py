@@ -3,7 +3,7 @@ from conductor.client import worker_task
 from models.wdm.wdm_device_vendor import WDM_DEVICE_HUAWEI_NAME_SUBSTRINGS
 from models.wdm.wdm_device_vendor import WDM_DEVICE_UNI_ACTIVATION_SUBSTRINGS
 from task_logging.task_logger import get_task_logger
-
+from conductor.client.http.models.task_def import TaskDef
 task_logger = get_task_logger()
 
 

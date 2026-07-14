@@ -1,6 +1,7 @@
 from typing import Any
 
 from conductor.client import worker_task
+from conductor.client.http.models.task_def import TaskDef
 
 
 def aggregate_commands_by_layer(

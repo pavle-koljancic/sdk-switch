@@ -4,6 +4,7 @@ from conductor.client import worker_task
 
 from models.fork.dynamic_fork_inputs import DynamicForkInputs
 from models.svlan_extraction.svlan_extraction_output import SvlanExtractionOutput
+from conductor.client.http.models.task_def import TaskDef
 
 
 @worker_task(

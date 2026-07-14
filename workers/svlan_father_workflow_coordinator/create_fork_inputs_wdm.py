@@ -3,7 +3,7 @@ from typing import Any
 from conductor.client import worker_task
 
 from models.fork.dynamic_fork_inputs import DynamicForkInputs
-
+from conductor.client.http.models.task_def import TaskDef
 
 @worker_task(
     task_definition_name="create_fork_inputs_wdm",

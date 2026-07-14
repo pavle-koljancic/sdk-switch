@@ -2,7 +2,7 @@ from conductor.client import worker_task
 
 from models.router.router_interfaces import CiscoIOSInterface
 from models.router.router_interfaces import CiscoIOSXrInterface
-
+from conductor.client.http.models.task_def import TaskDef
 
 def _full_to_short_interface(full_name: str, os_version: str) -> str | None:
     """Convert full interface name to short enum key"""
