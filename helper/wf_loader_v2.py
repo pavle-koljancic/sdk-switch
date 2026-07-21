@@ -8,8 +8,10 @@ from typing import Union
 from typing import cast
 from urllib.parse import urlparse
 
-from frinx.common.frinx_rest import CONDUCTOR_URL_BASE
+from conductor.client.configuration.configuration import Configuration
 from pydantic import BaseModel
+
+config = Configuration()
 
 FAILED_STATUSES = [
     "CANCELLED",
@@ -104,7 +106,7 @@ class WorkflowDataNode:
                     TaskError(
                         name=task["referenceTaskName"],
                         status=task["status"],
-                        info=task["reasonForIncompletion"],
+                        info=task.get("reasonForIncompletion", "unknown"),
                         task_id=task["taskId"],
                     )
                 )
@@ -132,7 +134,7 @@ class WorkflowDataNode:
 
 @lru_cache(maxsize=2048)
 def get_wrokflow_with_tasks(workflow_id: str) -> WorkflowDataNode:
-    parsed_url = urlparse(CONDUCTOR_URL_BASE)
+    parsed_url = urlparse(config.host)
     conn = http.client.HTTPConnection(parsed_url.hostname, port=parsed_url.port)
     payload = ""
     # TODO SWITCH TO FRINX HEADERS LOADED FRON .env

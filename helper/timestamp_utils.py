@@ -5,17 +5,22 @@ from typing import cast
 from zoneinfo import ZoneInfo
 
 import requests
-from frinx.common.frinx_rest import CONDUCTOR_HEADERS
-from frinx.common.frinx_rest import CONDUCTOR_URL_BASE
-from frinx.common.logging.root_logger import logger as task_logger
+
+from task_logging.task_logger import get_task_logger
+
+from conductor.client.configuration.configuration import Configuration
+
+task_logger = get_task_logger()
+
+config = Configuration()
 
 
 def get_workflow_data(workflow_id: str) -> dict[str, Any]:
     """Fetches workflow details by workflow ID from Conductor API as a dictionary."""
-    url = f"{CONDUCTOR_URL_BASE}/workflow/{workflow_id}"
+    url = f"{config.host}/workflow/{workflow_id}"
 
     try:
-        response = requests.get(url, headers=CONDUCTOR_HEADERS)
+        response = requests.get(url, headers={})
         response.raise_for_status()
         return cast(dict[str, Any], response.json())
     except requests.RequestException as e:
