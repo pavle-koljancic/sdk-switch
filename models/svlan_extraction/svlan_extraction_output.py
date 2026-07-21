@@ -41,4 +41,4 @@ class SvlanExtractionOutput(BaseModel):
     @computed_field
     def interface_type(self) -> str:
         key = self.kit.bandwidth or "default_key"
-        return bandwidth_type_mapping.get(key, "N/A")
+        return bandwidth_type_mapping.get(key.upper(), "N/A")
