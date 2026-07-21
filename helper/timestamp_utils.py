@@ -1,4 +1,3 @@
-import os
 from datetime import UTC
 from datetime import datetime
 from typing import Any
@@ -6,17 +5,18 @@ from typing import cast
 from zoneinfo import ZoneInfo
 
 import requests
+from conductor.client.configuration.configuration import Configuration
 
 from task_logging.task_logger import get_task_logger
 
 task_logger = get_task_logger()
 
+config = Configuration()
+
 
 def get_workflow_data(workflow_id: str) -> dict[str, Any]:
     """Fetches workflow details by workflow ID from Conductor API as a dictionary."""
-
-    base_url = os.environ.get("CONDUCTOR_SERVER_URL")
-    url = f"{base_url}/workflow/{workflow_id}"
+    url = f"{config.host}/workflow/{workflow_id}"
 
     try:
         response = requests.get(url, headers={})
