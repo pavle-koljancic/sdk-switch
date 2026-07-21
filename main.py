@@ -10,6 +10,7 @@ from task_logging.task_execution_logger import TaskExecutionLogger
 from workers import discover_worker_modules
 
 import_module("patches.conductor")
+from workers import discover_worker_modules
 
 
 def validate_env() -> None:
@@ -49,6 +50,7 @@ def validate_env() -> None:
 def main() -> None:
     validate_env()
     config = Configuration()
+
     event_listeners = [TaskExecutionLogger()]
     import_modules: list[str] = discover_worker_modules()
 
