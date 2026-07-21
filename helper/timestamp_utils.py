@@ -5,10 +5,9 @@ from typing import cast
 from zoneinfo import ZoneInfo
 
 import requests
+from conductor.client.configuration.configuration import Configuration
 
 from task_logging.task_logger import get_task_logger
-
-from conductor.client.configuration.configuration import Configuration
 
 task_logger = get_task_logger()
 
