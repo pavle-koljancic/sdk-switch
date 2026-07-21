@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 
 from conductor.client.automator.task_handler import TaskHandler
@@ -7,6 +6,7 @@ from dotenv import load_dotenv
 
 from helper.utils import check_env_vars
 from task_logging.task_execution_logger import TaskExecutionLogger
+from workers import discover_worker_modules
 
 
 def validate_env() -> None:
@@ -17,7 +17,7 @@ def validate_env() -> None:
     # Ensure required environment variables are set
     check_env_vars(
         [
-            "CONDUCTOR_URL_BASE",
+            "CONDUCTOR_SERVER_URL",
             "OPENFB_DB_USER",
             "OPENFB_DB_PASSWORD",
             "OPENFB_DB_NAME",
@@ -45,12 +45,11 @@ def validate_env() -> None:
 
 def main() -> None:
     validate_env()
-
-    base_url = os.environ.get("CONDUCTOR_URL_BASE")
-    config = Configuration(base_url=base_url)
+    config = Configuration()
 
     event_listeners = [TaskExecutionLogger()]
-    import_modules: list[str] = []
+    import_modules: list[str] = discover_worker_modules()
+
     with TaskHandler(
         configuration=config,
         scan_for_annotated_workers=True,
