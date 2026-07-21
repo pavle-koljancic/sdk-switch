@@ -37,7 +37,7 @@ def export_to_local_disk(
     workflow_id: str,
     pop_name: str,
     directory: str | int,
-    data_to_save: object,
+    data_to_save: str | list[str] | list[dict[str, Any]] | dict[str, Any] | None,
     filetype: str = "txt",
     fields: list[str] = [],
 ) -> WorkerOutput:

@@ -8,7 +8,7 @@ def has_worker_task(file_path: Path) -> bool:
     tree = ast.parse(file_path.read_text())
 
     for node in ast.walk(tree):
-        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+        if isinstance(node, ast.FunctionDef | ast.AsyncFunctionDef):
             for decorator in node.decorator_list:
                 if isinstance(decorator, ast.Name) and decorator.id == "worker_task":
                     return True
